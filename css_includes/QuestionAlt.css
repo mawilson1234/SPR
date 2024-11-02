@@ -1,0 +1,24 @@
+.QuestionAlt {
+    margin-left: 5px;
+    padding-left: 5px;
+    font-size: 40px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+li.scale-box {
+    float: left;
+    list-style: none;
+    margin-left: 5px;
+    padding-left: 5px;
+    margin-right: 2em;
+    padding-right: 5px;
+    border: 2px #9ea4b1 solid;
+    width: auto;
+    height: auto;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    text-align: center;
+}
+span.fake-link {
+    color: blue;
+    cursor: default;
+}
