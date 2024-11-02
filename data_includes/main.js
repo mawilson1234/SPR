@@ -1,10 +1,8 @@
-// This is a PCIbex implementation of a simple Lexical Decision task for
-// LINGUIST412 @ University of Massachusetts
+// This is a PCIbex implementation of a simple self-paced reading task for
+// CGSC/LING 496/696 @ University of Delaware
 
-// Brian Dillon, October 2021
+// Michael Wilson, November 2024
 // CC-BY
-
-// Updated slightly by Michael Wilson November 2024
 
 PennController.ResetPrefix(null) // Shorten command names (keep this)
 DebugOff()
@@ -34,10 +32,10 @@ newTrial('instructions',
 	fullscreen(),
 	
 	newText(
-		`<p>Welcome! In this experiment, we want you to decide as quickly as possible whether what you see is a word of English, or not.</p><p>
-			If you think it IS a word, press the 'f' button.</p><p>
-			If you think it IS NOT a word, press the 'j' button.</p><p>
-			Try to respond as accurately and quickly as possible. If you wait more than 6 seconds, you will not be able to respond, and the experiment will move on.</p><p>
+		`<p>Welcome! In this experiment, we want you to read sentences one word at a time. When you are finished reading a word, push the space button to show the next word.</p><p>
+			Afterward, you will see a question about the sentence you read.</p><p>
+			Push the "f" key if you think the answer on the left is correct, and "j" if you think the answer on the right is correct.</p><p>
+			Try to read at a natural pace, and respond to the questions as quickly and accurately as possible.</p><p>
 		`
 	)
 		.css(centered_justified_style)
@@ -60,50 +58,41 @@ Template('stimuli.csv', currentrow =>
 			.css(trial_style)
 			.print('center at 50%', 'middle at 50%')
 		,
-
-		newText(`Reminder: Press F it is a word, press J if it is not a word.`)
-			.css(centered_justified_style)
-			.print('center at 50%', 'bottom at 90%')
-		,
-
-		newTimer('wait1', 1000)
+		
+		newTimer('wait1', 2000)
 			.start()
 			.wait()
 		,
 		
 		getText(`cross`).remove(),
 		
-		newTimer('wait2', 500)
-			.start()
+		newController(
+			'EPDashedSentence',
+			{s: currentrow.SENTENCE}
+		)
+			.print()
+			.log()
 			.wait()
-		,
-			
-		newTimer('deadline', 6000)
-			.start()
-		,
-
-		newVar('RT')
-			.global()
-			.set(v => Date.now())
-		,
-
-		newText(currentrow.WORD)
-			.css(trial_style)
-			.print('center at 50%', 'middle at 50%')
-		,
-
-		newKey('response', 'F', 'J')
-			.log('first')
-			.callback(getTimer('deadline').stop())
-			.callback(getVar('RT').set(v => Date.now() - v))
+			.remove()
 		,
 		
-		getTimer('deadline')
+		newController(
+			'QuestionAlt', {
+				q: currentrow.QUESTION, 
+				as: [['f', currentrow.LEFT_ANSWER], ['j', currentrow.RIGHT_ANSWER]],
+				randomOrder: false,
+				presentHorizontally: true,
+				hasCorrect: currentrow.LEFT_ANSWER == currentrow.CORRECT_ANSWER ? 0 : 1
+			}
+		)
+			.print()
+			.log()
 			.wait()
+			.remove()
 	)
-		.log('word',      currentrow.WORD)
-		.log('frequency', currentrow.FREQ)
-		.log('RT',        getVar('RT'))
+		.log('sentence',       currentrow.SENTENCE)
+		.log('question',       currentrow.QUESTION)
+		.log('correct_answer', currentrow.CORRECT_ANSWER)
 )
 
 newTrial('end',
