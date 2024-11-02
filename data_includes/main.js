@@ -11,14 +11,7 @@ var centered_justified_style = {
 	'text-align': 'justify', 
 	margin: '0 auto', 
 	'margin-bottom': '3em',
-	width: '30em',
-	'font-size': '16px',
-	'font-family': 'Helvetica, sans-serif'
-}
-
-var trial_style = {
-	'font-family': 'Helvetica, sans-serif',
-	'font-size': '48px'
+	width: '30em'
 }
 
 Sequence(
@@ -61,6 +54,7 @@ Template('stimuli.csv', currentrow =>
 				ignoreFailure: true
 			}
 		)
+			.css({'text-align': 'center'})
 			.print()
 			.wait()
 			.remove()
@@ -73,6 +67,7 @@ Template('stimuli.csv', currentrow =>
 				display: 'in place'
 			}
 		)
+			.css({'text-align': 'center'})
 			.print()
 			.log()
 			.wait()
@@ -88,6 +83,7 @@ Template('stimuli.csv', currentrow =>
 				hasCorrect: currentrow.LEFT_ANSWER == currentrow.CORRECT_ANSWER ? 0 : 1
 			}
 		)
+			.css({'text-align': 'center'})
 			.print()
 			.log()
 			.wait()
