@@ -32,7 +32,7 @@ newTrial('instructions',
 	fullscreen(),
 	
 	newText(
-		`<p>Welcome! In this experiment, we want you to read sentences one word at a time. When you are finished reading a word, push the space button to show the next word.</p><p>
+		`<p>Welcome! In this experiment, we want you to read sentences one word at a time. When you are finished reading a word, push the space bar to show the next word.</p><p>
 			Afterward, you will see a question about the sentence you read.</p><p>
 			Push the "f" key if you think the answer on the left is correct, and "j" if you think the answer on the right is correct.</p><p>
 			Try to read at a natural pace, and respond to the questions as quickly and accurately as possible.</p><p>
@@ -56,7 +56,7 @@ Template('stimuli.csv', currentrow =>
 		
 		newText(`cross`, `+`)
 			.css(trial_style)
-			.print('center at 50%', 'middle at 50%')
+			.print()
 		,
 		
 		newTimer('wait1', 2000)
@@ -67,7 +67,7 @@ Template('stimuli.csv', currentrow =>
 		getText(`cross`).remove(),
 		
 		newController(
-			'EPDashedSentence',
+			'DashedSentence',
 			{s: currentrow.SENTENCE}
 		)
 			.print()
