@@ -57,7 +57,8 @@ Template('stimuli.csv', currentrow =>
 		newController(
 			'Separator', {
 				transfer: 2000,
-				normalMessage: '+'
+				normalMessage: '+',
+				ignoreFailure: true
 			}
 		)
 			.print()
