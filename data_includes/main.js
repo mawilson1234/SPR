@@ -54,7 +54,7 @@ Template('stimuli.csv', currentrow =>
 				ignoreFailure: true
 			}
 		)
-			.css({'text-align': 'center'})
+			.center()
 			.print()
 			.wait()
 			.remove()
@@ -67,7 +67,7 @@ Template('stimuli.csv', currentrow =>
 				display: 'in place'
 			}
 		)
-			.css({'text-align': 'center'})
+			.center()
 			.print()
 			.log()
 			.wait()
@@ -83,7 +83,7 @@ Template('stimuli.csv', currentrow =>
 				hasCorrect: currentrow.LEFT_ANSWER == currentrow.CORRECT_ANSWER ? 0 : 1
 			}
 		)
-			.css({'text-align': 'center'})
+			.center()
 			.print()
 			.log()
 			.wait()
