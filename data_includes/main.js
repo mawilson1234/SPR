@@ -54,21 +54,23 @@ Template('stimuli.csv', currentrow =>
 	newTrial(
 		'trial',
 		
-		newText(`cross`, `+`)
-			.css(trial_style)
+		newController(
+			'Separator', {
+				transfer: 2000,
+				normalMessage: '+'
+			}
+		)
 			.print()
-		,
-		
-		newTimer('wait1', 2000)
-			.start()
 			.wait()
+			.remove()
 		,
-		
-		getText(`cross`).remove(),
 		
 		newController(
-			'DashedSentence',
-			{s: currentrow.SENTENCE}
+			'DashedSentence', {
+				s: currentrow.SENTENCE,
+				mode: 'self-paced reading',
+				display: 'in place'
+			}
 		)
 			.print()
 			.log()
