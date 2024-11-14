@@ -84,7 +84,7 @@ demographics <- df |>
 	mutate(Parameter = gsub('-(mono|bi|multi)_', '_', Parameter)) |>
 	rename(
 		question = Parameter,
-		response = Value
+		response = Value 
 	)
 	
 demographics |>
