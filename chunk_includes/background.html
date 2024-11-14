@@ -40,6 +40,7 @@
 			type="radio" 
 			id="monolingual" 
 			value="monolingual" 
+			class="obligatory"
 			onclick="
 				document.getElementById('monolingual_text').style.display='block'; 
 				document.getElementById('bilingual_text').style.display='none'; 
@@ -51,6 +52,7 @@
 			type="radio" 
 			id="bilingual" 
 			value="bilingual" 
+			class="obligatory"
 			onclick="
 				document.getElementById('monolingual_text').style.display='none'; 
 				document.getElementById('bilingual_text').style.display='block'; 
@@ -61,7 +63,8 @@
 			name="demographics_nlanguages" 
 			type="radio" 
 			id="multilingual" 
-			value="multilingual" 
+			value="multilingual"
+			class="obligatory" 
 			onclick="
 				document.getElementById('monolingual_text').style.display='none'; 
 				document.getElementById('bilingual_text').style.display='none'; 
