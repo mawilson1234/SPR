@@ -63,6 +63,8 @@ df <- read.pcibex('results.csv') |>
 	) |>
 	select(-Results.reception.time, -MD5.hash.of.participant.s.IP.address) |>
 	select(participant, everything())
+	
+# pull out demographics info
 
 # pull out sentences and questions separately, then rejoin
 reading <- df |>
