@@ -63,8 +63,32 @@ df <- read.pcibex('results.csv') |>
 	) |>
 	select(-Results.reception.time, -MD5.hash.of.participant.s.IP.address) |>
 	select(participant, everything())
-	
+
 # pull out demographics info
+demographics <- df |>
+	filter(grepl('^demographics', Parameter)) |>
+	select(participant, Parameter, Value) |> 
+	group_by(participant) |>
+	mutate(
+		Parameter = gsub('^demographics_', '', Parameter),
+		nlanguages = Value[Parameter == 'nlanguages']
+	) |> 
+	ungroup() |>
+	filter(
+		(Parameter == 'nlanguages') |
+		(nlanguages == 'monolingual' & grepl('-mono_', Parameter)) |
+		(nlanguages == 'bilingual' & grepl('-bi_', Parameter)) |
+		(nlanguages == 'multilingual' & grepl('-multi_', Parameter))
+	) |>
+	select(-nlanguages) |>
+	mutate(Parameter = gsub('-(mono|bi|multi)_', '_', Parameter)) |>
+	rename(
+		question = Parameter,
+		response = Value
+	)
+	
+demographics |>
+	fwrite('demographics.csv', row.names = FALSE)
 
 # pull out sentences and questions separately, then rejoin
 reading <- df |>
