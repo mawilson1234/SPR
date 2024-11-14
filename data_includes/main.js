@@ -26,7 +26,7 @@ newTrial('demographics',
 	newHtml('demographics', 'background.html')
 		.css(centered_justified_style)
 		.radioWarning("You must select an option for '%name%'.")
-		.inputWarning("You must provide an answer for '%name'.")
+		.inputWarning("You must provide an answer for '%name%'.")
 		.print()
 		.log()
 	,
