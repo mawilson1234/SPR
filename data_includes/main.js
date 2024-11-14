@@ -17,7 +17,7 @@ var centered_justified_style = {
 Sequence(
 	'demographics',
 	'instructions',
-	randomize('trial') ,
+	randomize('trial'),
 	SendResults(),
 	'end'
 )
