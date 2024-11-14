@@ -114,6 +114,7 @@ Template('stimuli.csv', currentrow =>
 			.remove()
 	)
 		.log('item',           currentrow.ITEM)
+		.log('group',          currentrow.GROUP)
 		.log('sentence',       currentrow.SENTENCE)
 		.log('condition',      currentrow.CONDITION)
 		.log('question',       currentrow.QUESTION)
