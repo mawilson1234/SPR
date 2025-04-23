@@ -1,7 +1,7 @@
 // This is a PCIbex implementation of a simple self-paced reading task for
 // CGSC/LING 496/696 @ University of Delaware
 
-// Michael Wilson, November 2024
+// Michael Wilson, April 2025
 // CC-BY
 
 PennController.ResetPrefix(null) // Shorten command names (keep this)
@@ -25,10 +25,11 @@ newTrial('instructions',
 	fullscreen(),
 	
 	newText(
-		`<p>Welcome! In this experiment, we want you to read sentences one word at a time. When you are finished reading a word, push the space bar to show the next word.</p><p>
-			Afterward, you will see a question about the sentence you read.</p><p>
-			Push the "f" key if you think the answer on the left is correct, and "j" if you think the answer on the right is correct.</p><p>
-			Try to read at a natural pace, and respond to the questions as quickly and accurately as possible.</p><p>
+		`<p>Welcome! In this experiment, you will read sentences one word at a time. 
+			When you are finished reading a word, push the space bar to show the next word.</p>
+		<p>Afterward, you will see a question about the sentence you read.</p>
+		<p>Push the "f" key if you think the answer on the left is correct, and "j" if you think the answer on the right is correct.</p>
+		<p>Try to read at a natural pace, and respond to the questions as quickly and accurately as possible.</p><p>
 		`
 	)
 		.css(centered_justified_style)
@@ -62,7 +63,7 @@ Template('stimuli.csv', currentrow =>
 		
 		newController(
 			'EPDashedSentence', {
-				s: currentrow.SENTENCE,
+				s: currentrow.sentence,
 				mode: 'self-paced reading',
 				display: 'in place'
 			}
@@ -76,11 +77,11 @@ Template('stimuli.csv', currentrow =>
 		
 		newController(
 			'QuestionAlt', {
-				q: currentrow.QUESTION, 
-				as: [['f', currentrow.LEFT_ANSWER], ['j', currentrow.RIGHT_ANSWER]],
+				q: currentrow.question, 
+				as: [['f', currentrow.left_answer], ['j', currentrow.right_answer]],
 				randomOrder: false,
 				presentHorizontally: true,
-				hasCorrect: currentrow.LEFT_ANSWER == currentrow.CORRECT_ANSWER ? 0 : 1
+				hasCorrect: currentrow.left_answer == currentrow.correct_answer ? 0 : 1
 			}
 		)
 			.center()
@@ -89,11 +90,11 @@ Template('stimuli.csv', currentrow =>
 			.wait()
 			.remove()
 	)
-		.log('item',           currentrow.ITEM)
-		.log('sentence',       currentrow.SENTENCE)
-		.log('condition',      currentrow.CONDITION)
-		.log('question',       currentrow.QUESTION)
-		.log('correct_answer', currentrow.CORRECT_ANSWER)
+		.log('item',           currentrow.item)
+		.log('sentence',       currentrow.sentence)
+		.log('condition',      currentrow.condition)
+		.log('question',       currentrow.question)
+		.log('correct_answer', currentrow.correct_answer)
 )
 
 newTrial('end',
