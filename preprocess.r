@@ -101,6 +101,10 @@ reading <- df |>
 		word_number = Parameter,
 		word = Value,
 		reading_time = Reading.time
+	) |>
+	mutate(
+		sentence = gsub('%2C', ',', sentence) |>
+			trimws()
 	)
 
 questions <- df |>
@@ -113,6 +117,10 @@ questions <- df |>
 		accuracy = Reading.time,
 		response_time = Newline.
 	) |>
+	mutate(
+		sentence = gsub('%2C', ',', sentence) |>
+			trimws()
+	) |>
 	select(
 		participant, item:question,
 		correct_answer, response, accuracy:response_time
@@ -121,6 +129,13 @@ questions <- df |>
 # recombine
 df <- reading |>
 	left_join(questions)
+
+df <- df |>
+	select(
+		participant, item, condition, sentence, 
+		word_number, word, reading_time, question, 
+		correct_answer, response, accuracy, response_time
+	)
 
 df |>
 	fwrite('cleaned_results.csv', row.names = FALSE)
