@@ -62,10 +62,10 @@ Template('stimuli.csv', currentrow =>
 		,
 		
 		newController(
-			'EPDashedSentence', {
+			'DashedSentence', {
 				s: currentrow.sentence,
 				mode: 'self-paced reading',
-				display: 'in place'
+				display: 'dashed'
 			}
 		)
 			.center()

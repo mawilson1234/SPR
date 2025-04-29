@@ -66,7 +66,7 @@ df <- read.pcibex('results.csv') |>
 
 # pull out sentences and questions separately, then rejoin
 reading <- df |>
-	filter(PennElementName == 'EPDashedSentence') |>
+	filter(PennElementName == 'DashedSentence') |>
 	select(
 		participant, Parameter, Value, 
 		item, sentence, condition, Reading.time

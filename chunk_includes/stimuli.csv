@@ -1,3 +1,3 @@
-﻿ITEM,SENTENCE,CONDITION,QUESTION,LEFT_ANSWER,RIGHT_ANSWER,CORRECT_ANSWER
+﻿item,sentence,condition,question,left_answer,right_answer,correct_answer
 1,As Bill hunted the deer ran into the woods.,early closure,Did Bill hunt the deer?,Yes,No,No
 1,As Bill hunted the pheasant the deer ran into the woods.,late closure,Did Bill hunt the deer?,Yes,No,No
